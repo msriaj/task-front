@@ -14,6 +14,7 @@ const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [expiresAt, setExpiresAt] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [paidAmount, setPaidAmount] = useState(0);
 
   const isAuthenticated = () => {
     if (!user || !expiresAt) return false;
@@ -31,7 +32,7 @@ const UserContext = ({ children }) => {
         setExpiresAt(userInfo.expiresAt);
         setUser(userInfo.email);
         setIsLoading(false);
-
+        setPaidAmount(userInfo.totalPayable);
         return true;
       }
     } catch (error) {
@@ -54,7 +55,7 @@ const UserContext = ({ children }) => {
         setExpiresAt(userInfo.expiresAt);
         setUser(userInfo.email);
         setIsLoading(false);
-
+        setPaidAmount(userInfo.totalPayable);
         return true;
       }
     } catch (error) {
@@ -76,9 +77,11 @@ const UserContext = ({ children }) => {
     try {
       const res = await Axios.get("/auth/token-verify");
       if (res.data) {
-        const { user, expiresAt } = res.data;
+        console.log(res.data);
+        const { user, expiresAt, totalPayable } = res.data;
         setExpiresAt(expiresAt);
         setUser(user);
+        setPaidAmount(totalPayable);
         setIsLoading(false);
       }
     } catch (error) {
@@ -101,6 +104,9 @@ const UserContext = ({ children }) => {
     register,
     logout,
     user,
+    paidAmount,
+
+    setPaidAmount,
   };
 
   return <Provider value={contextData}>{isLoading ? <div>Loading...</div> : children}</Provider>;

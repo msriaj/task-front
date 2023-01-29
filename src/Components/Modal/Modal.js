@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function FormModal({ open, onClose, defaultValues, resetDefaultValues, setData }) {
+export default function FormModal({ open, onClose, defaultValues, resetDefaultValues, handleAdd, handleUpdate }) {
   const {
     register,
     handleSubmit,
@@ -10,17 +10,12 @@ export default function FormModal({ open, onClose, defaultValues, resetDefaultVa
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    setData(data);
-    onClose(false);
-    reset();
-  };
-
   const handleOnclose = () => {
     onClose(false);
     resetDefaultValues(null);
     reset();
   };
+  console.log(defaultValues);
 
   useEffect(() => {
     if (defaultValues) {
@@ -45,7 +40,7 @@ export default function FormModal({ open, onClose, defaultValues, resetDefaultVa
           aria-modal="true"
           aria-labelledby="modal-headline"
         >
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form>
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 mx-4 sm:text-left w-full">
@@ -114,14 +109,14 @@ export default function FormModal({ open, onClose, defaultValues, resetDefaultVa
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               {defaultValues ? (
                 <button
-                  type="submit"
+                  onClick={handleSubmit((data) => handleUpdate({ ...data, billingId: defaultValues.billingId }, reset))}
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Update
                 </button>
               ) : (
                 <button
-                  type="submit"
+                  onClick={handleSubmit((data) => handleAdd(data, reset))}
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Add

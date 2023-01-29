@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const { logout, user } = useAuth();
+  const { logout, user, paidAmount } = useAuth();
   return (
     <div>
       <div className="md:w-9/12 items-center  font-medium text-gray-700 mx-auto py-2 flex justify-between">
@@ -19,7 +19,7 @@ const Navbar = () => {
             <>
               <div className="flex items-center gap-2">
                 <span className="none md:block">Paid Amount: </span>
-                <span>38</span>
+                <span>{paidAmount}</span>
               </div>
               <div>
                 <FaSignOutAlt onClick={() => logout()} className="text-2xl hover:text-red-400 cursor-pointer" />

@@ -68,7 +68,7 @@ const Table = () => {
         console.log(err);
         setDeleteModal(false);
 
-        notify("error", err.response.data.message);
+        notify(err.response.data.message, "error");
       });
   };
 

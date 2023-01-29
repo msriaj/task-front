@@ -32,7 +32,7 @@ const Home = () => {
     <div>
       <div className="relative ">
         <img
-          src="https://images.pexels.com/photos/3747463/pexels-photo-3747463.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+          src="https://images.pexels.com/photos/918986/pexels-photo-918986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           className="absolute inset-0 object-cover w-full h-full"
           alt=""
         />

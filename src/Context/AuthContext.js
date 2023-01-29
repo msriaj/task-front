@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import Loader from "../Components/Loader/Loader";
 import { notify } from "../Components/notify/notify";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Axios } from "../services/axiosInstance";
@@ -109,7 +110,7 @@ const UserContext = ({ children }) => {
     setPaidAmount,
   };
 
-  return <Provider value={contextData}>{isLoading ? <div>Loading...</div> : children}</Provider>;
+  return <Provider value={contextData}>{isLoading ? <Loader /> : children}</Provider>;
 };
 
 export default UserContext;

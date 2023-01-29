@@ -63,7 +63,7 @@ const Home = () => {
               <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
                 <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
                   <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">Sign up</h3>
-                  <form onSubmit={submitHandler}>
+                  <form autoComplete="off" onSubmit={submitHandler}>
                     <div className="mb-1 sm:mb-2">
                       <label htmlFor="email" className="inline-block mb-1 font-medium">
                         E-mail

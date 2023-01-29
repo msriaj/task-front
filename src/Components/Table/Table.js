@@ -86,7 +86,8 @@ const Table = () => {
     if (newTempData) {
       console.log("called");
       const newObj = { ...newTempData, billingId: false };
-      setBillingList((prev) => [newObj, ...prev.slice(0, prev.length - 1)]);
+
+      setBillingList((prev) => (prev.length < 9 ? [newObj, ...prev] : [newObj, ...prev.slice(0, 9)]));
     }
 
     if (error) {

@@ -43,6 +43,29 @@ const UserContext = ({ children }) => {
     }
   };
 
+  const register = async (credentials) => {
+    try {
+      const res = await Axios.post("/register", credentials);
+
+      if (res.data) {
+        const { userInfo } = res.data;
+        console.log(userInfo);
+        setToken("token", userInfo.token);
+        setExpiresAt(userInfo.expiresAt);
+        setUser(userInfo.email);
+        setIsLoading(false);
+
+        return true;
+      }
+    } catch (error) {
+      console.log(error.response);
+      if (error.response?.status === 400) {
+        notify(error.response?.data, "error");
+        return false;
+      }
+    }
+  };
+
   const logout = () => {
     setUser(null);
     setExpiresAt(null);
@@ -75,6 +98,7 @@ const UserContext = ({ children }) => {
   const contextData = {
     isAuthenticated: isAuthenticated(),
     login,
+    register,
     logout,
     user,
   };
